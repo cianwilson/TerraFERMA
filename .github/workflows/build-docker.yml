@@ -38,7 +38,7 @@ jobs:
           password: ${{ secrets.DOCKER_TOKEN }}
           
       - name: Build and push base
-        id: docker_build
+        id: docker_build_base
         uses: docker/build-push-action@v3
         with:
           context: .
@@ -48,7 +48,7 @@ jobs:
           tags: terraferma/base:${{ env.name }}-${{ matrix.release }}
 
       - name: Build and push dev-env
-        id: docker_build
+        id: docker_build_devenv
         uses: docker/build-push-action@v3
         with:
           context: .
