@@ -30,7 +30,8 @@
 #
 
 # build from the base image
-FROM terraferma/base:fenics-2019.1.0-focal
+ARG TAG=fenics-2019.1.0-focal
+FROM terraferma/base:${TAG}
 MAINTAINER terraferma <terraferma@lists.columbia.edu>
 
 USER root

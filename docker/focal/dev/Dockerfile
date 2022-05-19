@@ -26,7 +26,8 @@
 #
 
 # build using the TerraFERMA development environment
-FROM terraferma/dev-env:fenics-2019.1.0-focal
+ARG TAG=fenics-2019.1.0-focal
+FROM terraferma/dev-env:${TAG}
 MAINTAINER terraferma <terraferma@lists.columbia.edu>
 
 USER tfuser
