@@ -52,7 +52,7 @@ ENV DIAMOND_CONFIG_PATH $INSTALL_PREFIX/share/buckettools/diamond:$DIAMOND_CONFI
 # link the installed tests and tutorials directories to the home directory
 RUN ln -s $INSTALL_PREFIX/share/terraferma/tests $TF_HOME/tests && \
     ln -s $INSTALL_PREFIX/share/terraferma/tutorials $TF_HOME/tutorials
-COPY WELCOME $TF_HOME/WELCOME
+COPY docker/focal/dev/WELCOME $TF_HOME/WELCOME
 
 WORKDIR $TF_HOME
 USER root
