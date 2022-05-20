@@ -48,7 +48,7 @@ jobs:
           tags: terraferma/base:${{ env.name }}-${{ matrix.release }}
 
       - name: Build and push dev-env
-        id: docker_build_devenv
+        id: docker_build_dev-env
         uses: docker/build-push-action@v3
         with:
           context: .
@@ -57,4 +57,79 @@ jobs:
           file: docker/${{ matrix.release }}/dev-env/Dockerfile
           push: true
           tags: terraferma/dev-env:${{ env.name }}-${{ matrix.release }}
+
+      - name: Build and push dev
+        id: docker_build_dev
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          build-arg: TAG=${{ env.name }}-${{ matrix.release }}
+          file: docker/${{ matrix.release }}/dev/Dockerfile
+          push: true
+          tags: terraferma/dev:${{ env.name }}-${{ matrix.release }}
+
+      - name: Build and push base amd64
+        id: docker_build_base_amd64
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          platforms: linux/amd64
+          file: docker/${{ matrix.release }}/base/Dockerfile
+          push: true
+          tags: terraferma/base:${{ env.name }}-${{ matrix.release }}-amd64
+
+      - name: Build and push dev-env amd64
+        id: docker_build_dev-env_amd64
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          platforms: linux/amd64
+          build-arg: TAG=${{ env.name }}-${{ matrix.release }}-amd64
+          file: docker/${{ matrix.release }}/dev-env/Dockerfile
+          push: true
+          tags: terraferma/dev-env:${{ env.name }}-${{ matrix.release }}-amd64
+
+      - name: Build and push dev amd64
+        id: docker_build_dev_amd64
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          platforms: linux/amd64
+          build-arg: TAG=${{ env.name }}-${{ matrix.release }}-amd64
+          file: docker/${{ matrix.release }}/dev/Dockerfile
+          push: true
+          tags: terraferma/dev:${{ env.name }}-${{ matrix.release }}-amd64
+
+      - name: Build and push base arm64
+        id: docker_build_base_arm64
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          platforms: linux/arm64
+          file: docker/${{ matrix.release }}/base/Dockerfile
+          push: true
+          tags: terraferma/base:${{ env.name }}-${{ matrix.release }}-arm64
+
+      - name: Build and push dev-env arm64
+        id: docker_build_dev-env_arm64
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          platforms: linux/arm64
+          build-arg: TAG=${{ env.name }}-${{ matrix.release }}-arm64
+          file: docker/${{ matrix.release }}/dev-env/Dockerfile
+          push: true
+          tags: terraferma/dev-env:${{ env.name }}-${{ matrix.release }}-arm64
+
+      - name: Build and push dev arm64
+        id: docker_build_dev_arm64
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          platforms: linux/arm64
+          build-arg: TAG=${{ env.name }}-${{ matrix.release }}-arm64
+          file: docker/${{ matrix.release }}/dev/Dockerfile
+          push: true
+          tags: terraferma/dev:${{ env.name }}-${{ matrix.release }}-arm64
 
