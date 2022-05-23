@@ -1,6 +1,7 @@
 name: Build Docker
 
-on: [push]
+on: 
+  workflow_dispatch
 
 jobs:
 
