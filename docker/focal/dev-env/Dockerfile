@@ -48,7 +48,6 @@ RUN apt-get update && \
                        gfortran \
                        cmake \
                        flex \
-                       libopenblas-dev \
                        libeigen3-dev \
                        libboost-dev \
                        libboost-filesystem-dev \
@@ -106,14 +105,14 @@ ENV OPENBLAS_VERBOSE=0
 USER tfuser
 
 # download and install petsc from source
-RUN git clone -b v3.14.6 -q https://gitlab.com/petsc/petsc.git && \
+RUN git clone -b v3.17.1 -q https://gitlab.com/petsc/petsc.git && \
     cd petsc && \
     python3 ./configure --COPTFLAGS="-O3" \
                         --CXXOPTFLAGS="-O3" \
                         --FOPTFLAGS="-O3" \
                         --with-shared-libraries=1 \
-                        --with-openblas=1 \
                         --with-debugging=0 \
+                        --download-openblas=1 \
                         --download-suitesparse=1 \
                         --download-hypre=1 \
                         --download-ml=1 \
@@ -122,6 +121,7 @@ RUN git clone -b v3.14.6 -q https://gitlab.com/petsc/petsc.git && \
                         --download-blacs=1 \
                         --download-scalapack=1 \
                         --download-mumps=1 \
+                        --download-cmake=1 \
                         --prefix=$INSTALL_PREFIX && \
     make all && \
     make install && \
@@ -171,7 +171,7 @@ RUN git clone -b tferma-master-2019.1.0 -q https://bitbucket.org/tferma/dolfin.g
     rm -rf /tmp/*
 
 # download and install spud from source
-RUN git clone -q https://github.com/FluidityProject/spud.git && \
+RUN git clone -q -b update_config.guess https://github.com/FluidityProject/spud.git && \
     cd spud && \
     ./configure --prefix=$INSTALL_PREFIX && \
     make && \
