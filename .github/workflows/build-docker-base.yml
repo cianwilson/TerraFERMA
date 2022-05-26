@@ -38,16 +38,6 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
           
-      - name: Build and push base
-        id: docker_build_base
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          platforms: linux/amd64,linux/arm64
-          file: docker/${{ matrix.release }}/base/Dockerfile
-          push: true
-          tags: terraferma/base:${{ env.name }}-${{ matrix.release }}
-
       - name: Build and push base amd64
         id: docker_build_base_amd64
         uses: docker/build-push-action@v3
@@ -67,3 +57,14 @@ jobs:
           file: docker/${{ matrix.release }}/base/Dockerfile
           push: true
           tags: terraferma/base:${{ env.name }}-${{ matrix.release }}-arm64
+
+      - name: Build and push base
+        id: docker_build_base
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          file: docker/${{ matrix.release }}/base/Dockerfile
+          push: true
+          tags: terraferma/base:${{ env.name }}-${{ matrix.release }}
+

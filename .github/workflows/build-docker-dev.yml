@@ -38,17 +38,6 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
           
-      - name: Build and push dev
-        id: docker_build_dev
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          platforms: linux/amd64,linux/arm64
-          build-args: TAG=${{ env.name }}-${{ matrix.release }}
-          file: docker/${{ matrix.release }}/dev/Dockerfile
-          push: true
-          tags: terraferma/dev:${{ env.name }}-${{ matrix.release }}
-
       - name: Build and push dev amd64
         id: docker_build_dev_amd64
         uses: docker/build-push-action@v3
@@ -70,4 +59,15 @@ jobs:
           file: docker/${{ matrix.release }}/dev/Dockerfile
           push: true
           tags: terraferma/dev:${{ env.name }}-${{ matrix.release }}-arm64
+
+      - name: Build and push dev
+        id: docker_build_dev
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          build-args: TAG=${{ env.name }}-${{ matrix.release }}
+          file: docker/${{ matrix.release }}/dev/Dockerfile
+          push: true
+          tags: terraferma/dev:${{ env.name }}-${{ matrix.release }}
 
