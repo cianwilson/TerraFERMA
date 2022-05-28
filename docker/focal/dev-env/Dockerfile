@@ -171,7 +171,7 @@ RUN git clone -b tferma-master-2019.1.0 -q https://bitbucket.org/tferma/dolfin.g
     rm -rf /tmp/*
 
 # download and install spud from source
-RUN git clone -q -b update_config.guess https://github.com/FluidityProject/spud.git && \
+RUN git clone -q https://github.com/FluidityProject/spud.git && \
     cd spud && \
     ./configure --prefix=$INSTALL_PREFIX && \
     make && \
